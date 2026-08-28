@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db";
+import authRoutes from "./routes/authRoutes";
 
 
 
@@ -13,6 +14,9 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors())
+
+
+app.use('/api/auth',authRoutes)
 
 app.get('/', (req: Request, res: Response) => {
   res.send('User Service is Running!');
