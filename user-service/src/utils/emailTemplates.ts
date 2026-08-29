@@ -33,3 +33,53 @@ export const generateOtpEmailTemplate = (firstName: string, otp: string): string
     </div>
   `;
 };
+
+export const generateResetPasswordEmailTemplate = (firstName: string, otp: string): string => {
+  const currentYear = new Date().getFullYear();
+
+  return `
+    <div style="background-color: #f8f9fa; padding: 40px 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+      <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
+        
+        <div style="text-align: center; padding: 35px 20px 25px 20px; border-bottom: 4px solid #F59E0B;">
+          <img src="https://res.cloudinary.com/doujmzgn3/image/upload/v1787933139/Screenshot_2026-08-28_213436_r58hge.png" alt="Teen Angle" style="max-width: 160px; height: auto; display: block; margin: 0 auto;" />
+        </div>
+        
+        <div style="padding: 40px 35px; color: #374151;">
+          <h2 style="color: #111827; font-size: 24px; font-weight: 700; margin: 0 0 20px 0;">Hello ${firstName},</h2>
+          
+          <p style="font-size: 16px; line-height: 1.6; margin: 0 0 35px 0;">
+            We received a request to reset your <strong>Teen Angle</strong> account password. Please use the verification code below to set up a new password.
+          </p>
+          
+          <div style="background-color: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 30px; text-align: center; margin: 0 0 25px 0;">
+            <span style="display: block; font-size: 12px; font-weight: 700; color: #B45309; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;">
+              Password Reset Code
+            </span>
+            <span style="display: block; font-size: 46px; font-weight: 800; color: #111827; letter-spacing: 12px; margin-left: 12px;">
+              ${otp}
+            </span>
+          </div>
+          
+          <p style="font-size: 14px; color: #EF4444; text-align: center; font-weight: 600; margin: 0 0 35px 0;">
+            &#8987; This code expires in 10 minutes.
+          </p>
+          
+          <p style="font-size: 14px; line-height: 1.6; color: #6B7280; margin: 0; border-top: 1px solid #F3F4F6; padding-top: 25px;">
+            If you did not request a password reset, please ignore this email or contact support if you have concerns. Your password will remain unchanged.
+          </p>
+        </div>
+        
+        <div style="background-color: #F9FAFB; padding: 24px 35px; text-align: center;">
+          <p style="font-size: 13px; color: #9CA3AF; margin: 0 0 8px 0;">
+            &copy; ${currentYear} Teen Angle. All rights reserved.
+          </p>
+          <p style="font-size: 12px; color: #D1D5DB; margin: 0;">
+            This is an automated message, please do not reply.
+          </p>
+        </div>
+        
+      </div>
+    </div>
+  `;
+};
