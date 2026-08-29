@@ -1,6 +1,6 @@
 import express from "express";
 
-import { registerUser } from "../controllers/authController";
+import { registerUser, verifyOtp } from "../controllers/authController";
 
 
 
@@ -9,5 +9,6 @@ const router = express.Router();
 
 
 router.post('/register', registerUser);
+router.post('/verify-otp', verifyOtp);
 
 export default router;
