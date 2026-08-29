@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./utils/db";
 import authRoutes from "./routes/authRoutes";
+import userRoutes from "./routes/userRoutes";
 
 
 
@@ -17,6 +18,7 @@ app.use(cors())
 
 
 app.use('/api/auth',authRoutes)
+app.use('/api/users', userRoutes);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('User Service is Running!');

@@ -12,6 +12,7 @@ export interface IUser extends Document {
     resetPasswordToken?: string;
     resetPasswordExpire?: Date;
     googleId?: string;
+    wishlist: string[]
 }
 
 const userSchema: Schema= new Schema(
@@ -55,6 +56,10 @@ const userSchema: Schema= new Schema(
         googleId: {
              type: String
              },
+        wishlist: {
+                type: [String],
+                default: []
+            }
 
 
     },{
