@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import User from '../models/User';
 import { sendEmail } from '../utils/sendEmail';
 import { generateOtpEmailTemplate } from '../utils/emailTemplates';
+import jwt from 'jsonwebtoken';
 
 export const registerUser = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -108,6 +109,79 @@ export const verifyOtp = async (req: Request, res: Response): Promise<void> => {
 
   }catch (error) {
     console.error('OTP Verification Error:', error);
+    res.
+    status(500).
+    json(
+      {
+       message: 'Internal server error.'
+       }
+      );
+  }
+}
+
+export const loginUser = async (req: Request, res: Response): Promise<void> => {
+
+  try{
+
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email})
+
+    if (!user) {
+      res.
+      status(404).
+      json(
+        {
+         message: 'invalid email or password.' 
+        }
+      );
+      return;
+    }
+
+    if (!user.isVerified) {
+      res.
+      status(403).
+      json(
+        {
+          message: 'User is not verified. Please verify your account first.'
+    }
+    );
+  }
+
+   const isMatch = await bcrypt.compare(password, user.password as string);
+
+   if (!isMatch) {
+    res.
+    status(401).
+    json(
+      {
+         message: 'invalid email or password.' 
+        }
+      );
+    return;
+   }
+
+   const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET as string,
+      { expiresIn: '30d' }
+    );
+
+    res.
+    status(200).
+    json(
+      {
+        _id: user._id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      role: user.role,
+      token
+      }
+    );
+
+  }catch (error) {
+    console.error('Login Error:', error);
     res.
     status(500).
     json(
