@@ -34,3 +34,6 @@ const CategorySchema: Schema = new mongoose.Schema({
         }
     }]
 },{timestamps: true});
+
+
+export default mongoose.model<ICategory>('Category', CategorySchema);

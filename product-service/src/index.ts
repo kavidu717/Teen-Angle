@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './utils/db';
+import categoryRoutes from './routes/categoryRoutes';
 
 dotenv.config();
 
@@ -15,6 +16,9 @@ app.use(cors());
 app.get('/', (req: Request, res: Response) => {
     res.send('Product Service is Running!');
 });
+
+// routes here
+app.use('/api/categories', categoryRoutes);
 
 const startServer = async () => {
     try {
