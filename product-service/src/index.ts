@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './utils/db';
 import categoryRoutes from './routes/categoryRoutes';
+import productRoutes from './routes/productRoutes';
 
 dotenv.config();
 
@@ -18,7 +19,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 // routes here
-app.use('/api/categories', categoryRoutes);
+    app.use('/api/categories', categoryRoutes);
+  app.use('/api/products', productRoutes);
 
 const startServer = async () => {
     try {

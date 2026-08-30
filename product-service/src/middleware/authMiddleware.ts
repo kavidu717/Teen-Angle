@@ -9,7 +9,8 @@ export interface AuthRequest extends Request {
 }
 
 interface DecodedToken extends JwtPayload {
-  id: string;
+  userId?: string;
+  id?: string;
   role: string;
 }
 
@@ -46,7 +47,7 @@ export const protect = (
     const decoded = jwt.verify(token, secret) as DecodedToken;
 
     req.user = {
-      _id: decoded.id,
+      _id: (decoded.userId || decoded.id) as string,
       role: decoded.role,
     };
 
