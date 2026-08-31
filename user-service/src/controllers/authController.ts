@@ -146,6 +146,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
           message: 'User is not verified. Please verify your account first.'
     }
     );
+    return;
   }
 
    const isMatch = await bcrypt.compare(password, user.password as string);
