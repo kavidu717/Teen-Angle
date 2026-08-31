@@ -66,49 +66,49 @@ export default function ProductsPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-bold text-black tracking-tight">
             Product Management
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-neutral-500 mt-1">
             Manage your store inventory, variants, and pricing.
           </p>
         </div>
         <Link
           href="/dashboard/products/new"
-          className="flex items-center space-x-2 px-4 py-2.5 rounded-lg bg-yellow-500 text-slate-950 font-semibold hover:bg-yellow-400 transition-colors shadow-sm text-sm"
+          className="flex items-center space-x-2 px-4 py-2.5 rounded-lg bg-black text-white font-semibold hover:bg-neutral-800 text-white transition-colors shadow-sm text-sm"
         >
           <Plus className="w-5 h-5" />
           <span>Add New Product</span>
         </Link>
       </div>
 
-      <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center space-x-4">
+      <div className="bg-white p-4 rounded-xl border border-neutral-200 shadow-sm flex items-center space-x-4">
         <div className="relative flex-1">
-          <Search className="w-5 h-5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-5 h-5 text-neutral-400 absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search products by name or description..."
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-yellow-500"
+            className="w-full pl-10 pr-4 py-2 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:border-black"
           />
         </div>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-neutral-200 rounded-xl shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="p-12 flex justify-center items-center">
-            <div className="w-8 h-8 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin" />
           </div>
         ) : products.length === 0 ? (
-          <div className="p-12 text-center text-slate-500 font-medium">
+          <div className="p-12 text-center text-neutral-500 font-medium">
             No products found.
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs uppercase tracking-wider font-semibold">
+                <tr className="bg-white border-b border-neutral-200 text-neutral-500 text-xs uppercase tracking-wider font-semibold">
                   <th className="px-6 py-4">Image</th>
                   <th className="px-6 py-4">Product Name</th>
                   <th className="px-6 py-4">Category</th>
@@ -117,11 +117,11 @@ export default function ProductsPage() {
                   <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-neutral-200">
                 {products.map((prod) => (
-                  <tr key={prod._id} className="hover:bg-slate-50/50 transition-colors">
+                  <tr key={prod._id} className="hover:bg-white/50 transition-colors">
                     <td className="px-6 py-4">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden border border-slate-200 relative bg-slate-100 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg overflow-hidden border border-neutral-200 relative bg-neutral-100 flex-shrink-0">
                         {prod.images && prod.images.length > 0 ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
@@ -130,30 +130,30 @@ export default function ProductsPage() {
                             className="w-full h-full object-cover"
                           />
                         ) : (
-                          <div className="w-full h-full flex items-center justify-center text-slate-400">
+                          <div className="w-full h-full flex items-center justify-center text-neutral-400">
                             <Package className="w-5 h-5" />
                           </div>
                         )}
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-semibold text-slate-900 text-sm">
+                    <td className="px-6 py-4 font-semibold text-black text-sm">
                       {prod.name}
                     </td>
-                    <td className="px-6 py-4 text-sm text-slate-600">
+                    <td className="px-6 py-4 text-sm text-neutral-600">
                       {prod.category?.name || "N/A"}
                     </td>
-                    <td className="px-6 py-4 text-sm font-medium text-slate-900">
+                    <td className="px-6 py-4 text-sm font-medium text-black">
                       ${prod.basePrice}
                     </td>
                     <td className="px-6 py-4">
-                      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200">
+                      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-neutral-700 border border-neutral-200">
                         {prod.variants?.length || 0} variants
                       </span>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <button
                         onClick={() => setSelectedProduct(prod)}
-                        className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-yellow-500 hover:text-slate-950 transition-colors text-xs font-semibold"
+                        className="inline-flex items-center space-x-1 px-3 py-1.5 rounded-lg bg-neutral-100 text-neutral-700 hover:bg-black text-white hover:text-white transition-colors text-xs font-semibold"
                       >
                         <Eye className="w-4 h-4" />
                         <span>View Details</span>
@@ -169,13 +169,13 @@ export default function ProductsPage() {
 
       {/* Product Details Modal */}
       {selectedProduct && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
-              <h3 className="text-lg font-bold text-slate-900">Product Details</h3>
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-2xl rounded-2xl shadow-2xl border border-neutral-200 overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200 bg-white">
+              <h3 className="text-lg font-bold text-black">Product Details</h3>
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="p-1 rounded-lg hover:bg-slate-200 text-slate-400 hover:text-slate-600 transition-colors"
+                className="p-1 rounded-lg hover:bg-slate-200 text-neutral-400 hover:text-neutral-600 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -184,7 +184,7 @@ export default function ProductsPage() {
             <div className="p-6 space-y-6 overflow-y-auto flex-1">
               {/* Basic Info */}
               <div className="flex space-x-4 items-start">
-                <div className="w-24 h-24 rounded-xl border border-slate-200 overflow-hidden bg-slate-100 flex-shrink-0">
+                <div className="w-24 h-24 rounded-xl border border-neutral-200 overflow-hidden bg-neutral-100 flex-shrink-0">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={selectedProduct.images[0]}
@@ -193,14 +193,14 @@ export default function ProductsPage() {
                   />
                 </div>
                 <div className="space-y-1 flex-1">
-                  <h2 className="text-xl font-bold text-slate-900">{selectedProduct.name}</h2>
-                  <p className="text-sm text-slate-500">{selectedProduct.description}</p>
+                  <h2 className="text-xl font-bold text-black">{selectedProduct.name}</h2>
+                  <p className="text-sm text-neutral-500">{selectedProduct.description}</p>
                   <div className="flex items-center space-x-4 pt-2">
-                    <span className="text-sm font-semibold text-slate-700">
-                      Base Price: <span className="text-slate-950">${selectedProduct.basePrice}</span>
+                    <span className="text-sm font-semibold text-neutral-700">
+                      Base Price: <span className="text-white">${selectedProduct.basePrice}</span>
                     </span>
-                    <span className="text-sm font-semibold text-slate-700">
-                      Category: <span className="text-slate-950">{selectedProduct.category?.name}</span>
+                    <span className="text-sm font-semibold text-neutral-700">
+                      Category: <span className="text-white">{selectedProduct.category?.name}</span>
                     </span>
                   </div>
                 </div>
@@ -209,11 +209,11 @@ export default function ProductsPage() {
               {/* General Attributes */}
               {selectedProduct.generalAttributes && Object.keys(selectedProduct.generalAttributes).length > 0 && (
                 <div className="space-y-2">
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">General Attributes</h4>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">General Attributes</h4>
                   <div className="flex flex-wrap gap-2">
                     {Object.entries(selectedProduct.generalAttributes).map(([key, value], idx) => (
-                      <span key={idx} className="px-3 py-1 rounded-lg bg-slate-100 text-slate-700 text-xs font-medium border border-slate-200">
-                        {key}: <strong className="text-slate-900">{String(value)}</strong>
+                      <span key={idx} className="px-3 py-1 rounded-lg bg-neutral-100 text-neutral-700 text-xs font-medium border border-neutral-200">
+                        {key}: <strong className="text-black">{String(value)}</strong>
                       </span>
                     ))}
                   </div>
@@ -222,28 +222,28 @@ export default function ProductsPage() {
 
               {/* Variants List */}
               <div className="space-y-3">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">Product Variants & Stock</h4>
-                <div className="border border-slate-200 rounded-lg overflow-hidden">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">Product Variants & Stock</h4>
+                <div className="border border-neutral-200 rounded-lg overflow-hidden">
                   <table className="w-full text-left border-collapse text-sm">
                     <thead>
-                      <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs uppercase">
+                      <tr className="bg-white border-b border-neutral-200 text-neutral-500 text-xs uppercase">
                         <th className="px-4 py-3">SKU</th>
                         <th className="px-4 py-3">Price</th>
                         <th className="px-4 py-3">Stock</th>
                         <th className="px-4 py-3">Attributes</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-slate-200">
+                    <tbody className="divide-y divide-neutral-200">
                       {selectedProduct.variants.map((v, idx) => (
-                        <tr key={idx} className="hover:bg-slate-50/50">
-                          <td className="px-4 py-3 font-semibold text-slate-900">{v.sku}</td>
-                          <td className="px-4 py-3 text-slate-700">${v.price}</td>
+                        <tr key={idx} className="hover:bg-white/50">
+                          <td className="px-4 py-3 font-semibold text-black">{v.sku}</td>
+                          <td className="px-4 py-3 text-neutral-700">${v.price}</td>
                           <td className="px-4 py-3">
                             <span className={`px-2 py-0.5 rounded text-xs font-semibold ${v.stock > 0 ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}`}>
                               {v.stock} units
                             </span>
                           </td>
-                          <td className="px-4 py-3 text-slate-600 text-xs">
+                          <td className="px-4 py-3 text-neutral-600 text-xs">
                             {v.attributes ? JSON.stringify(v.attributes) : "N/A"}
                           </td>
                         </tr>
@@ -254,10 +254,10 @@ export default function ProductsPage() {
               </div>
             </div>
 
-            <div className="px-6 py-4 border-t border-slate-200 bg-slate-50 flex justify-end">
+            <div className="px-6 py-4 border-t border-neutral-200 bg-white flex justify-end">
               <button
                 onClick={() => setSelectedProduct(null)}
-                className="px-4 py-2 rounded-lg bg-slate-900 text-white text-sm font-semibold hover:bg-slate-800 transition-colors"
+                className="px-4 py-2 rounded-lg bg-black text-white text-sm font-semibold hover:bg-neutral-800 transition-colors"
               >
                 Close
               </button>

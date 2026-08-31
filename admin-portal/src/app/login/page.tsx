@@ -134,9 +134,9 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-slate-50 relative overflow-hidden">
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2 bg-white relative overflow-hidden">
       {/* --- Left Side: Background Image --- */}
-      <div className="relative hidden lg:block bg-slate-900 overflow-hidden">
+      <div className="relative hidden lg:block bg-black overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -145,13 +145,13 @@ export default function AdminLogin() {
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="relative z-20 flex flex-col justify-end h-full p-12 text-white">
-          <span className="text-sm font-semibold tracking-wider uppercase text-yellow-400 mb-2">
+          <span className="text-sm font-semibold tracking-wider uppercase text-neutral-400 mb-2">
             Teen-Angle Admin Portal
           </span>
           <h2 className="text-4xl font-bold tracking-tight mb-4">
             Admin Management Portal
           </h2>
-          <p className="text-slate-300 max-w-md text-sm leading-relaxed">
+          <p className="text-neutral-300 max-w-md text-sm leading-relaxed">
             Secure backend control center for inventory, order processing, and comprehensive e-commerce administration.
           </p>
         </div>
@@ -161,7 +161,7 @@ export default function AdminLogin() {
       <div className="flex items-center justify-center p-8 sm:p-12 lg:p-16">
         <div className="w-full max-w-md space-y-8">
           <div className="flex flex-col items-center space-y-4">
-            <div className="w-28 h-28 rounded-full overflow-hidden shadow-lg border-2 border-slate-200 relative bg-white">
+            <div className="w-28 h-28 rounded-full overflow-hidden shadow-lg border-2 border-neutral-200 relative bg-white">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="https://res.cloudinary.com/doujmzgn3/image/upload/v1788105918/ChatGPT_Image_Aug_30_2026_09_33_38_PM_iskos8.png"
@@ -170,10 +170,10 @@ export default function AdminLogin() {
               />
             </div>
             <div className="text-center space-y-1">
-              <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+              <h1 className="text-3xl font-bold tracking-tight text-black">
                 Teen-Angle
               </h1>
-              <p className="text-sm text-slate-500">
+              <p className="text-sm text-neutral-500">
                 Please enter your credentials to access the admin dashboard.
               </p>
             </div>
@@ -181,7 +181,7 @@ export default function AdminLogin() {
 
           <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-6">
             <div className="space-y-1">
-              <label htmlFor="email" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="email" className="block text-sm font-medium text-neutral-700">
                 Email address
               </label>
               <div className="relative flex items-center">
@@ -190,9 +190,9 @@ export default function AdminLogin() {
                   type="email"
                   placeholder="admin@example.com"
                   {...loginForm.register("email")}
-                  className="w-full py-3 pr-10 bg-transparent border-b border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-yellow-500 text-sm transition-colors"
+                  className="w-full py-3 pr-10 bg-transparent border-b border-neutral-300 text-black placeholder-neutral-400 focus:outline-none focus:border-black text-sm transition-colors"
                 />
-                <Mail className="absolute right-0 w-5 h-5 text-yellow-600 pointer-events-none" />
+                <Mail className="absolute right-0 w-5 h-5 text-black pointer-events-none" />
               </div>
               {loginForm.formState.errors.email && (
                 <p className="text-xs text-red-600 font-medium mt-1">
@@ -203,13 +203,13 @@ export default function AdminLogin() {
 
             <div className="space-y-1">
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium text-slate-700">
+                <label htmlFor="password" className="block text-sm font-medium text-neutral-700">
                   Password
                 </label>
                 <button
                   type="button"
                   onClick={() => setIsDrawerOpen(true)}
-                  className="text-sm font-semibold text-slate-600 hover:text-yellow-600 transition-colors"
+                  className="text-sm font-semibold text-neutral-600 hover:text-black transition-colors"
                 >
                   Forgot password?
                 </button>
@@ -220,9 +220,9 @@ export default function AdminLogin() {
                   type="password"
                   placeholder="••••••••"
                   {...loginForm.register("password")}
-                  className="w-full py-3 pr-10 bg-transparent border-b border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-yellow-500 text-sm transition-colors"
+                  className="w-full py-3 pr-10 bg-transparent border-b border-neutral-300 text-black placeholder-neutral-400 focus:outline-none focus:border-black text-sm transition-colors"
                 />
-                <Lock className="absolute right-0 w-5 h-5 text-yellow-600 pointer-events-none" />
+                <Lock className="absolute right-0 w-5 h-5 text-black pointer-events-none" />
               </div>
               {loginForm.formState.errors.password && (
                 <p className="text-xs text-red-600 font-medium mt-1">
@@ -234,7 +234,7 @@ export default function AdminLogin() {
             <button
               type="submit"
               disabled={loginForm.formState.isSubmitting}
-              className="w-full py-3 px-4 rounded-lg bg-yellow-500 text-slate-950 font-semibold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-sm"
+              className="w-full py-3 px-4 rounded-lg bg-black text-white text-white font-semibold hover:bg-neutral-800 text-white focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-sm shadow-sm"
             >
               {loginForm.formState.isSubmitting ? "Authenticating..." : "Sign in to Dashboard"}
             </button>
@@ -245,7 +245,7 @@ export default function AdminLogin() {
       {/* --- Forgot Password Drawer (Slide-in UI) --- */}
       {isDrawerOpen && (
         <div
-          className="fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
           onClick={handleCloseDrawer}
         />
       )}
@@ -259,23 +259,23 @@ export default function AdminLogin() {
           
           <div className="flex items-start justify-between mb-8">
             <div>
-              <span className="text-xs font-bold tracking-widest text-yellow-500 uppercase mb-2 block">
+              <span className="text-xs font-bold tracking-widest text-black uppercase mb-2 block">
                 Teen-Angle
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-extrabold text-black tracking-tight">
                 {resetStep === 1 ? "Reset Password" : "Enter OTP & New Password"}
               </h2>
             </div>
             <button
               onClick={handleCloseDrawer}
-              className="p-2 -mr-2 rounded-full hover:bg-slate-100 text-slate-500 hover:text-slate-900 transition-colors"
+              className="p-2 -mr-2 rounded-full hover:bg-neutral-100 text-neutral-500 hover:text-black transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
           </div>
 
           <div className="w-full max-w-md lg:ml-8">
-            <p className="text-slate-500 mb-10 text-sm leading-relaxed">
+            <p className="text-neutral-500 mb-10 text-sm leading-relaxed">
               {resetStep === 1
                 ? "Enter your registered email address below. We'll send you a 6-digit verification code to reset your password."
                 : `Please enter the 6-digit code sent to ${resetEmail} along with your new password.`}
@@ -285,7 +285,7 @@ export default function AdminLogin() {
             {resetStep === 1 ? (
               <form onSubmit={forgotForm.handleSubmit(onForgotSubmit)} className="space-y-8">
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-slate-700">
+                  <label className="block text-sm font-semibold text-neutral-700">
                     Email address
                   </label>
                   <div className="relative flex items-center">
@@ -293,9 +293,9 @@ export default function AdminLogin() {
                       type="email"
                       placeholder="admin@example.com"
                       {...forgotForm.register("email")}
-                      className="w-full py-3 pr-10 bg-transparent border-b border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-yellow-500 text-sm transition-colors"
+                      className="w-full py-3 pr-10 bg-transparent border-b border-neutral-300 text-black placeholder-neutral-400 focus:outline-none focus:border-black text-sm transition-colors"
                     />
-                    <Mail className="absolute right-0 w-5 h-5 text-yellow-600 pointer-events-none" />
+                    <Mail className="absolute right-0 w-5 h-5 text-black pointer-events-none" />
                   </div>
                   {forgotForm.formState.errors.email && (
                     <p className="text-xs text-red-600 font-medium mt-1">
@@ -307,7 +307,7 @@ export default function AdminLogin() {
                 <button
                   type="submit"
                   disabled={forgotForm.formState.isSubmitting}
-                  className="w-full py-3.5 px-4 rounded-lg bg-yellow-500 text-slate-950 font-semibold hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 transition-colors disabled:opacity-50 text-sm shadow-sm"
+                  className="w-full py-3.5 px-4 rounded-lg bg-black text-white text-white font-semibold hover:bg-neutral-800 text-white focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors disabled:opacity-50 text-sm shadow-sm"
                 >
                   {forgotForm.formState.isSubmitting ? "Sending..." : "Send Verification Code"}
                 </button>
@@ -316,7 +316,7 @@ export default function AdminLogin() {
               // Verify OTP and Reset Password Form
               <form onSubmit={resetForm.handleSubmit(onResetSubmit)} className="space-y-8">
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-slate-700">
+                  <label className="block text-sm font-semibold text-neutral-700">
                     Reset Code (OTP)
                   </label>
                   <div className="relative flex items-center">
@@ -325,9 +325,9 @@ export default function AdminLogin() {
                       maxLength={6}
                       placeholder="123456"
                       {...resetForm.register("otp")}
-                      className="w-full py-3 pr-10 bg-transparent border-b border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-yellow-500 text-sm transition-colors tracking-widest"
+                      className="w-full py-3 pr-10 bg-transparent border-b border-neutral-300 text-black placeholder-neutral-400 focus:outline-none focus:border-black text-sm transition-colors tracking-widest"
                     />
-                    <KeyRound className="absolute right-0 w-5 h-5 text-yellow-600 pointer-events-none" />
+                    <KeyRound className="absolute right-0 w-5 h-5 text-black pointer-events-none" />
                   </div>
                   {resetForm.formState.errors.otp && (
                     <p className="text-xs text-red-600 font-medium mt-1">
@@ -337,7 +337,7 @@ export default function AdminLogin() {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-sm font-semibold text-slate-700">
+                  <label className="block text-sm font-semibold text-neutral-700">
                     New Password
                   </label>
                   <div className="relative flex items-center">
@@ -345,9 +345,9 @@ export default function AdminLogin() {
                       type="password"
                       placeholder="••••••••"
                       {...resetForm.register("newPassword")}
-                      className="w-full py-3 pr-10 bg-transparent border-b border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-yellow-500 text-sm transition-colors"
+                      className="w-full py-3 pr-10 bg-transparent border-b border-neutral-300 text-black placeholder-neutral-400 focus:outline-none focus:border-black text-sm transition-colors"
                     />
-                    <Lock className="absolute right-0 w-5 h-5 text-yellow-600 pointer-events-none" />
+                    <Lock className="absolute right-0 w-5 h-5 text-black pointer-events-none" />
                   </div>
                   {resetForm.formState.errors.newPassword && (
                     <p className="text-xs text-red-600 font-medium mt-1">
@@ -359,7 +359,7 @@ export default function AdminLogin() {
                 <button
                   type="submit"
                   disabled={resetForm.formState.isSubmitting}
-                  className="w-full py-3.5 px-4 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 transition-colors disabled:opacity-50 text-sm shadow-sm"
+                  className="w-full py-3.5 px-4 rounded-lg bg-black text-white font-semibold hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 transition-colors disabled:opacity-50 text-sm shadow-sm"
                 >
                   {resetForm.formState.isSubmitting ? "Resetting..." : "Confirm & Reset Password"}
                 </button>
@@ -371,7 +371,7 @@ export default function AdminLogin() {
                       setResetStep(1);
                       resetForm.reset();
                     }}
-                    className="text-sm font-medium text-slate-500 hover:text-yellow-600 transition-colors"
+                    className="text-sm font-medium text-neutral-500 hover:text-black transition-colors"
                   >
                     Change Email Address
                   </button>

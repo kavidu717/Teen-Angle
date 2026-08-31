@@ -133,46 +133,46 @@ export default function CategoryPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">
+          <h1 className="text-2xl font-bold text-black tracking-tight">
             Category Management
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-neutral-500 mt-1">
             Create and manage product categories with custom dynamic attributes.
           </p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="flex items-center space-x-2 px-4 py-2.5 rounded-lg bg-yellow-500 text-slate-950 font-semibold hover:bg-yellow-400 transition-colors shadow-sm text-sm"
+          className="flex items-center space-x-2 px-4 py-2.5 rounded-lg bg-black text-white font-semibold hover:bg-neutral-800 text-white transition-colors shadow-sm text-sm"
         >
           <FolderPlus className="w-5 h-5" />
           <span>Add New Category</span>
         </button>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+      <div className="bg-white border border-neutral-200 rounded-xl shadow-sm overflow-hidden">
         {isLoading ? (
           <div className="p-12 flex justify-center items-center">
-            <div className="w-8 h-8 border-4 border-yellow-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin" />
           </div>
         ) : categories.length === 0 ? (
-          <div className="p-12 text-center text-slate-500 font-medium">
+          <div className="p-12 text-center text-neutral-500 font-medium">
             No categories found. Create your first category above.
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs uppercase tracking-wider font-semibold">
+                <tr className="bg-white border-b border-neutral-200 text-neutral-500 text-xs uppercase tracking-wider font-semibold">
                   <th className="px-6 py-4">Image</th>
                   <th className="px-6 py-4">Category Name</th>
                   <th className="px-6 py-4">Dynamic Attributes</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-200">
+              <tbody className="divide-y divide-neutral-200">
                 {categories.map((cat) => (
-                  <tr key={cat._id} className="hover:bg-slate-50/50 transition-colors">
+                  <tr key={cat._id} className="hover:bg-white/50 transition-colors">
                     <td className="px-6 py-4">
-                      <div className="w-12 h-12 rounded-lg overflow-hidden border border-slate-200 relative bg-slate-100 flex-shrink-0">
+                      <div className="w-12 h-12 rounded-lg overflow-hidden border border-neutral-200 relative bg-neutral-100 flex-shrink-0">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                           src={cat.image}
@@ -181,7 +181,7 @@ export default function CategoryPage() {
                         />
                       </div>
                     </td>
-                    <td className="px-6 py-4 font-semibold text-slate-900 text-sm">
+                    <td className="px-6 py-4 font-semibold text-black text-sm">
                       {cat.name}
                     </td>
                     <td className="px-6 py-4">
@@ -190,13 +190,13 @@ export default function CategoryPage() {
                           cat.dynamicAttributes.map((attr, idx) => (
                             <span
                               key={idx}
-                              className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-700 border border-slate-200"
+                              className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-neutral-100 text-neutral-700 border border-neutral-200"
                             >
-                              {attr.name} <span className="text-yellow-600 ml-1 font-semibold">({attr.type})</span>
+                              {attr.name} <span className="text-black ml-1 font-semibold">({attr.type})</span>
                             </span>
                           ))
                         ) : (
-                          <span className="text-xs text-slate-400">No custom attributes</span>
+                          <span className="text-xs text-neutral-400">No custom attributes</span>
                         )}
                       </div>
                     </td>
@@ -209,16 +209,16 @@ export default function CategoryPage() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-lg  shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh]">
-            <div className="flex items-center justify-between px-6 py-4 border-b border-slate-200">
-              <h3 className="text-lg font-bold text-slate-900">Add New Category</h3>
+        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-lg  shadow-2xl border border-neutral-200 overflow-hidden flex flex-col max-h-[90vh]">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-neutral-200">
+              <h3 className="text-lg font-bold text-black">Add New Category</h3>
               <button
                 onClick={() => {
                   setIsModalOpen(false);
                   resetForm();
                 }}
-                className="p-1 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+                className="p-1 rounded-lg hover:bg-neutral-100 text-neutral-400 hover:text-neutral-600 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -226,7 +226,7 @@ export default function CategoryPage() {
 
             <form onSubmit={handleSubmit} className="p-6 space-y-6 overflow-y-auto flex-1">
               <div className="space-y-1">
-                <label className="block text-sm font-semibold text-slate-700">
+                <label className="block text-sm font-semibold text-neutral-700">
                   Category Name
                 </label>
                 <input
@@ -234,38 +234,38 @@ export default function CategoryPage() {
                   placeholder="e.g. Watches, Clothing"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full py-2.5 px-3 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-yellow-500 text-sm transition-colors"
+                  className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 text-black placeholder-neutral-400 focus:outline-none focus:border-black text-sm transition-colors"
                 />
               </div>
 
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">
+                <label className="block text-sm font-semibold text-neutral-700">
                   Category Image
                 </label>
                 <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 rounded-lg border border-dashed border-slate-300 flex items-center justify-center bg-slate-50 overflow-hidden relative">
+                  <div className="w-16 h-16 rounded-lg border border-dashed border-neutral-300 flex items-center justify-center bg-white overflow-hidden relative">
                     {imagePreview ? (
                       // eslint-disable-next-line @next/next/no-img-element
                       <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
                     ) : (
-                      <ImageIcon className="w-6 h-6 text-slate-400" />
+                      <ImageIcon className="w-6 h-6 text-neutral-400" />
                     )}
                   </div>
                   <input
                     type="file"
                     accept="image/*"
                     onChange={handleImageChange}
-                    className="text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100 transition-colors"
+                    className="text-sm text-neutral-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700 hover:file:bg-black text-white transition-colors"
                   />
                 </div>
               </div>
 
-              <div className="space-y-3 pt-2 border-t border-slate-200">
+              <div className="space-y-3 pt-2 border-t border-neutral-200">
                 <div className="flex items-center justify-between">
-                  <label className="block text-sm font-semibold text-slate-700">
+                  <label className="block text-sm font-semibold text-neutral-700">
                     Dynamic Attributes
                   </label>
-                  <span className="text-xs text-slate-400">Optional specs for products</span>
+                  <span className="text-xs text-neutral-400">Optional specs for products</span>
                 </div>
 
                 <div className="flex space-x-2">
@@ -274,12 +274,12 @@ export default function CategoryPage() {
                     placeholder="Attribute name (e.g. Material)"
                     value={attrName}
                     onChange={(e) => setAttrName(e.target.value)}
-                    className="flex-1 py-2 px-3 rounded-lg border border-slate-300 text-slate-900 placeholder-slate-400 focus:outline-none focus:border-yellow-500 text-sm"
+                    className="flex-1 py-2 px-3 rounded-lg border border-neutral-300 text-black placeholder-neutral-400 focus:outline-none focus:border-black text-sm"
                   />
                   <select
                     value={attrType}
                     onChange={(e) => setAttrType(e.target.value as "string" | "number" | "boolean")}
-                    className="py-2 px-3 rounded-lg border border-slate-300 text-slate-900 bg-white focus:outline-none focus:border-yellow-500 text-sm"
+                    className="py-2 px-3 rounded-lg border border-neutral-300 text-black bg-white focus:outline-none focus:border-black text-sm"
                   >
                     <option value="string">String</option>
                     <option value="number">Number</option>
@@ -288,7 +288,7 @@ export default function CategoryPage() {
                   <button
                     type="button"
                     onClick={handleAddAttribute}
-                    className="px-3 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-800 transition-colors"
+                    className="px-3 py-2 rounded-lg bg-black text-white hover:bg-neutral-800 transition-colors"
                   >
                     <Plus className="w-5 h-5" />
                   </button>
@@ -298,18 +298,18 @@ export default function CategoryPage() {
                   {dynamicAttributes.map((attr, index) => (
                     <div
                       key={index}
-                      className="flex items-center justify-between px-3 py-2 bg-slate-50 rounded-lg border border-slate-200 text-sm"
+                      className="flex items-center justify-between px-3 py-2 bg-white rounded-lg border border-neutral-200 text-sm"
                     >
                       <div className="flex items-center space-x-2">
                         <span className="font-semibold text-slate-800">{attr.name}</span>
-                        <span className="text-xs px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 font-medium">
+                        <span className="text-xs px-2 py-0.5 rounded bg-black text-white font-medium">
                           {attr.type}
                         </span>
                       </div>
                       <button
                         type="button"
                         onClick={() => handleRemoveAttribute(index)}
-                        className="text-slate-400 hover:text-red-600 transition-colors"
+                        className="text-neutral-400 hover:text-red-600 transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -318,21 +318,21 @@ export default function CategoryPage() {
                 </div>
               </div>
 
-              <div className="pt-4 border-t border-slate-200 flex justify-end space-x-3">
+              <div className="pt-4 border-t border-neutral-200 flex justify-end space-x-3">
                 <button
                   type="button"
                   onClick={() => {
                     setIsModalOpen(false);
                     resetForm();
                   }}
-                  className="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 font-semibold hover:bg-slate-50 text-sm transition-colors"
+                  className="px-4 py-2 rounded-lg border border-neutral-300 text-neutral-700 font-semibold hover:bg-white text-sm transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-4 py-2 rounded-lg bg-yellow-500 text-slate-950 font-semibold hover:bg-yellow-400 text-sm transition-colors disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-black text-white font-semibold hover:bg-neutral-800 text-white text-sm transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? "Creating..." : "Save Category"}
                 </button>

@@ -178,50 +178,50 @@ export default function AddProductPage() {
         <div className="flex items-center space-x-3">
           <button
             onClick={() => router.back()}
-            className="p-2 rounded-lg border border-slate-200 hover:bg-slate-100 transition-colors text-slate-600"
+            className="p-2 rounded-lg border border-neutral-200 hover:bg-neutral-100 transition-colors text-neutral-600"
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
-          <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Add New Product</h1>
+          <h1 className="text-2xl font-bold text-black tracking-tight">Add New Product</h1>
         </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Basic Info */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
-          <h2 className="text-lg font-bold text-slate-900 border-b pb-2">Basic Information</h2>
+        <div className="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm space-y-4">
+          <h2 className="text-lg font-bold text-black border-b pb-2">Basic Information</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="block text-sm font-semibold text-slate-700">Product Name</label>
+              <label className="block text-sm font-semibold text-neutral-700">Product Name</label>
               <input
                 type="text"
                 placeholder="e.g. Classic Leather Watch"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:border-black"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="block text-sm font-semibold text-slate-700">Base Price ($)</label>
+              <label className="block text-sm font-semibold text-neutral-700">Base Price ($)</label>
               <input
                 type="number"
                 placeholder="99.99"
                 value={basePrice}
                 onChange={(e) => setBasePrice(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:border-black"
               />
             </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-1">
-              <label className="block text-sm font-semibold text-slate-700">Category</label>
+              <label className="block text-sm font-semibold text-neutral-700">Category</label>
               <select
                 value={categoryId}
                 onChange={handleCategorySelect}
-                className="w-full py-2.5 px-3 rounded-lg border border-slate-300 bg-white text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 bg-white text-sm focus:outline-none focus:border-black"
               >
                 <option value="">Select Category</option>
                 {categories.map((cat) => (
@@ -231,22 +231,22 @@ export default function AddProductPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="block text-sm font-semibold text-slate-700">Brand</label>
+              <label className="block text-sm font-semibold text-neutral-700">Brand</label>
               <input
                 type="text"
                 placeholder="e.g. Rolex, Nike"
                 value={brand}
                 onChange={(e) => setBrand(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:border-black"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="block text-sm font-semibold text-slate-700">Target Sex</label>
+              <label className="block text-sm font-semibold text-neutral-700">Target Sex</label>
               <select
                 value={sex}
                 onChange={(e) => setSex(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-lg border border-slate-300 bg-white text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 bg-white text-sm focus:outline-none focus:border-black"
               >
                 <option value="Unisex">Unisex</option>
                 <option value="Men">Men</option>
@@ -256,24 +256,24 @@ export default function AddProductPage() {
           </div>
 
           <div className="space-y-1">
-            <label className="block text-sm font-semibold text-slate-700">Description</label>
+            <label className="block text-sm font-semibold text-neutral-700">Description</label>
             <textarea
               rows={3}
               placeholder="Detailed description of the product..."
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full py-2.5 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-yellow-500"
+              className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:border-black"
             />
           </div>
         </div>
 
         {/* Images */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
-          <h2 className="text-lg font-bold text-slate-900 border-b pb-2">Product Images</h2>
+        <div className="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm space-y-4">
+          <h2 className="text-lg font-bold text-black border-b pb-2">Product Images</h2>
           
           <div className="flex flex-wrap gap-4 items-center">
             {imagePreviews.map((src, index) => (
-              <div key={index} className="w-20 h-20 rounded-lg border relative overflow-hidden bg-slate-50 group">
+              <div key={index} className="w-20 h-20 rounded-lg border relative overflow-hidden bg-white group">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={src} alt="Upload Preview" className="w-full h-full object-cover" />
                 <button
@@ -286,61 +286,61 @@ export default function AddProductPage() {
               </div>
             ))}
 
-            <label className="w-20 h-20 rounded-lg border-2 border-dashed border-slate-300 flex flex-col items-center justify-center cursor-pointer hover:border-yellow-500 transition-colors bg-slate-50">
-              <Upload className="w-5 h-5 text-slate-400" />
-              <span className="text-[10px] text-slate-500 mt-1">Add Image</span>
+            <label className="w-20 h-20 rounded-lg border-2 border-dashed border-neutral-300 flex flex-col items-center justify-center cursor-pointer hover:border-black transition-colors bg-white">
+              <Upload className="w-5 h-5 text-neutral-400" />
+              <span className="text-[10px] text-neutral-500 mt-1">Add Image</span>
               <input type="file" multiple accept="image/*" onChange={handleImageChange} className="hidden" />
             </label>
           </div>
         </div>
 
         {/* Variants & Dynamic Attributes */}
-        <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm space-y-4">
-          <h2 className="text-lg font-bold text-slate-900 border-b pb-2">Product Variants & Attributes</h2>
+        <div className="bg-white p-6 rounded-xl border border-neutral-200 shadow-sm space-y-4">
+          <h2 className="text-lg font-bold text-black border-b pb-2">Product Variants & Attributes</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-1">
-              <label className="block text-sm font-semibold text-slate-700">SKU</label>
+              <label className="block text-sm font-semibold text-neutral-700">SKU</label>
               <input
                 type="text"
                 placeholder="e.g. WATCH-BLK-01"
                 value={variantSku}
                 onChange={(e) => setVariantSku(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:border-black"
               />
             </div>
             <div className="space-y-1">
-              <label className="block text-sm font-semibold text-slate-700">Variant Price ($)</label>
+              <label className="block text-sm font-semibold text-neutral-700">Variant Price ($)</label>
               <input
                 type="number"
                 placeholder="89.99"
                 value={variantPrice}
                 onChange={(e) => setVariantPrice(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:border-black"
               />
             </div>
             <div className="space-y-1">
-              <label className="block text-sm font-semibold text-slate-700">Stock Quantity</label>
+              <label className="block text-sm font-semibold text-neutral-700">Stock Quantity</label>
               <input
                 type="number"
                 placeholder="50"
                 value={variantStock}
                 onChange={(e) => setVariantStock(e.target.value)}
-                className="w-full py-2.5 px-3 rounded-lg border border-slate-300 text-sm focus:outline-none focus:border-yellow-500"
+                className="w-full py-2.5 px-3 rounded-lg border border-neutral-300 text-sm focus:outline-none focus:border-black"
               />
             </div>
           </div>
 
           {/* Render Dynamic Attributes based on selected category */}
           {selectedCategory && selectedCategory.dynamicAttributes.length > 0 && (
-            <div className="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-3">
-              <span className="text-xs font-bold uppercase tracking-wider text-yellow-600">
+            <div className="p-4 bg-white rounded-lg border border-neutral-200 space-y-3">
+              <span className="text-xs font-bold uppercase tracking-wider text-black">
                 Category Specific Attributes ({selectedCategory.name})
               </span>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {selectedCategory.dynamicAttributes.map((attr, idx) => (
                   <div key={idx} className="space-y-1">
-                    <label className="block text-xs font-semibold text-slate-700">{attr.name} ({attr.type})</label>
+                    <label className="block text-xs font-semibold text-neutral-700">{attr.name} ({attr.type})</label>
                     <input
                       type={attr.type === "number" ? "number" : "text"}
                       placeholder={`Enter ${attr.name}`}
@@ -351,7 +351,7 @@ export default function AddProductPage() {
                           [attr.name]: attr.type === "number" ? Number(e.target.value) : e.target.value,
                         })
                       }
-                      className="w-full py-2 px-3 rounded-lg border border-slate-300 bg-white text-sm focus:outline-none focus:border-yellow-500"
+                      className="w-full py-2 px-3 rounded-lg border border-neutral-300 bg-white text-sm focus:outline-none focus:border-black"
                     />
                   </div>
                 ))}
@@ -362,7 +362,7 @@ export default function AddProductPage() {
           <button
             type="button"
             onClick={handleAddVariant}
-            className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-colors text-sm"
+            className="flex items-center space-x-2 px-4 py-2 rounded-lg bg-black text-white font-semibold hover:bg-neutral-800 transition-colors text-sm"
           >
             <Plus className="w-4 h-4" />
             <span>Add Variant</span>
@@ -370,10 +370,10 @@ export default function AddProductPage() {
 
           {/* Variants Table */}
           {variants.length > 0 && (
-            <div className="border border-slate-200 rounded-lg overflow-hidden mt-4">
+            <div className="border border-neutral-200 rounded-lg overflow-hidden mt-4">
               <table className="w-full text-left border-collapse text-sm">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 text-xs uppercase">
+                  <tr className="bg-white border-b border-neutral-200 text-neutral-500 text-xs uppercase">
                     <th className="px-4 py-3">SKU</th>
                     <th className="px-4 py-3">Price</th>
                     <th className="px-4 py-3">Stock</th>
@@ -381,20 +381,20 @@ export default function AddProductPage() {
                     <th className="px-4 py-3 text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200">
+                <tbody className="divide-y divide-neutral-200">
                   {variants.map((v, idx) => (
-                    <tr key={idx} className="hover:bg-slate-50/50">
-                      <td className="px-4 py-3 font-medium text-slate-900">{v.sku}</td>
-                      <td className="px-4 py-3 text-slate-600">${v.price}</td>
-                      <td className="px-4 py-3 text-slate-600">{v.stock}</td>
-                      <td className="px-4 py-3 text-slate-600">
+                    <tr key={idx} className="hover:bg-white/50">
+                      <td className="px-4 py-3 font-medium text-black">{v.sku}</td>
+                      <td className="px-4 py-3 text-neutral-600">${v.price}</td>
+                      <td className="px-4 py-3 text-neutral-600">{v.stock}</td>
+                      <td className="px-4 py-3 text-neutral-600">
                         {JSON.stringify(v.attributes)}
                       </td>
                       <td className="px-4 py-3 text-right">
                         <button
                           type="button"
                           onClick={() => handleRemoveVariant(idx)}
-                          className="text-slate-400 hover:text-red-600 transition-colors"
+                          className="text-neutral-400 hover:text-red-600 transition-colors"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -411,14 +411,14 @@ export default function AddProductPage() {
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-6 py-2.5 rounded-lg border border-slate-300 text-slate-700 font-semibold hover:bg-slate-50 text-sm"
+            className="px-6 py-2.5 rounded-lg border border-neutral-300 text-neutral-700 font-semibold hover:bg-white text-sm"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className="px-6 py-2.5 rounded-lg bg-yellow-500 text-slate-950 font-semibold hover:bg-yellow-400 text-sm disabled:opacity-50 shadow-sm"
+            className="px-6 py-2.5 rounded-lg bg-black text-white font-semibold hover:bg-neutral-800 text-white text-sm disabled:opacity-50 shadow-sm"
           >
             {isSubmitting ? "Saving Product..." : "Save Product"}
           </button>
