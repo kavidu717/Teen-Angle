@@ -1,0 +1,32 @@
+
+
+services:
+  user-service:
+    build: ./user-service
+    container_name: user-service
+    env_file:
+      - ./user-service/.env
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+
+  product-service:
+    build: ./product-service
+    container_name: product-service
+    env_file:
+      - ./product-service/.env
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: api-gateway
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - user-service
+      - product-service
+    restart: always

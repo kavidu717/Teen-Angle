@@ -1,6 +1,7 @@
 import { Response, Request } from 'express';
 import Product from '../models/Product';
 import { AuthRequest } from '../middleware/authMiddleware';
+import mongoose from 'mongoose';
 
 export const createProduct = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
@@ -134,3 +135,65 @@ export const getAllProducts = async (req: Request, res: Response): Promise<void>
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+
+
+export const getProductById = async (req: Request, res: Response): Promise<void> => {
+  try {
+
+     const id=req.params.id;
+
+    if (!id || typeof id !== 'string' ||!mongoose.Types.ObjectId.isValid(id)) {
+
+      res.
+      status(400).
+      json(
+        {
+           message: 'Invalid Product ID' 
+          }
+        );
+      return;
+    }
+
+    const product = await Product.findById(req.params.id).populate('category', 'name image dynamicAttributes');
+
+    if (!product) {
+      res.
+      status(404).
+      json(
+        {
+           message: 'Product not found'
+           }
+          );
+      return; 
+    }
+
+    const relatedProducts = await Product.find({
+      category: product.category,
+      _id: { $ne: product._id }
+    })
+    .populate('category', 'name')
+    .limit(8);
+
+    res.
+    status(200).
+    json(
+      {
+      product,
+      relatedProducts
+    }
+  );
+
+  } catch (error) {
+    res
+    .status(500).
+    json(
+      {
+         message: 'Internal server error' 
+        }
+      );
+  }
+};
+
+
+

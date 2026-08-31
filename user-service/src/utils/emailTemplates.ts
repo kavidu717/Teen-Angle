@@ -4,7 +4,7 @@ export const generateOtpEmailTemplate = (firstName: string, otp: string): string
   return `
     <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e7eb; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
       <div style="background-color: #ffffff; padding: 25px; text-align: center; border-bottom: 4px solid #FFC107;">
-        <img src="https://res.cloudinary.com/doujmzgn3/image/upload/v1787933139/Screenshot_2026-08-28_213436_r58hge.png" alt="YouShop Logo" style="max-width: 180px; height: auto;" />
+        <img src="https://res.cloudinary.com/doujmzgn3/image/upload/v1788105918/ChatGPT_Image_Aug_30_2026_09_33_38_PM_iskos8.png" alt="YouShop Logo" style="max-width: 180px; height: auto;" />
       </div>
       <div style="padding: 30px 40px; color: #333333;">
         <h2 style="color: #111827; margin-top: 0; font-size: 24px;">Hello ${firstName},</h2>
@@ -34,6 +34,7 @@ export const generateOtpEmailTemplate = (firstName: string, otp: string): string
   `;
 };
 
+
 export const generateResetPasswordEmailTemplate = (firstName: string, otp: string): string => {
   const currentYear = new Date().getFullYear();
 
@@ -42,7 +43,7 @@ export const generateResetPasswordEmailTemplate = (firstName: string, otp: strin
       <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
         
         <div style="text-align: center; padding: 35px 20px 25px 20px; border-bottom: 4px solid #F59E0B;">
-          <img src="https://res.cloudinary.com/doujmzgn3/image/upload/v1787933139/Screenshot_2026-08-28_213436_r58hge.png" alt="Teen Angle" style="max-width: 160px; height: auto; display: block; margin: 0 auto;" />
+          <img src="https://res.cloudinary.com/doujmzgn3/image/upload/v1788105918/ChatGPT_Image_Aug_30_2026_09_33_38_PM_iskos8.png" alt="Teen Angle" style="max-width: 160px; height: auto; display: block; margin: 0 auto;" />
         </div>
         
         <div style="padding: 40px 35px; color: #374151;">
