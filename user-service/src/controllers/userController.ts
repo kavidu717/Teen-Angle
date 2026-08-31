@@ -90,3 +90,59 @@ export const getWishlist = async (req: AuthRequest, res: Response): Promise<void
     res.status(500).json({ message: 'Internal server error.' });
   }
 };
+
+export const getAllUsers = async (req: Request, res: Response): Promise<void> => {
+    try{
+
+        const users = await User.find().select('-password');
+
+        res.status(200).json
+   ({ 
+        success: true,
+        count: users.length,
+        data: users,
+    });
+
+    }catch (error) {
+        res.
+        status(500).
+        json({
+
+           message: 'Internal server error.' 
+
+          });
+    }
+}
+
+export const deleteUser = async (req: Request, res: Response): Promise<void> => {
+     try{
+
+      const {id}  = req.params
+       
+      const user = await User.findByIdAndDelete(id);
+
+      if (!user) {
+        res.
+        status(404).
+        json({
+            message: 'User not found.'
+        });
+        return;
+      }
+
+      res.
+      status(200).
+      json({
+          success: true,
+          message: 'User deleted successfully.'
+      });
+
+     }catch (error) {
+        res.
+        status(500).
+        json({
+            message: 'Internal server error.'
+        
+        });
+    }
+}
