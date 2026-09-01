@@ -36,19 +36,19 @@ export default function Navbar() {
 
                     {/* Desktop Navigation */}
                     <ul className="hidden lg:flex items-center space-x-12 flex-1 justify-center">
-                        <li><Link href="/" className="text-xs font-bold tracking-[0.2em] uppercase text-white/70 hover:text-white transition-colors">Home</Link></li>
-                        <li><Link href="/shop" className="text-xs font-bold tracking-[0.2em] uppercase text-white/70 hover:text-white transition-colors">Shop</Link></li>
-                        <li><Link href="/about" className="text-xs font-bold tracking-[0.2em] uppercase text-white/70 hover:text-white transition-colors">About Us</Link></li>
-                        <li><Link href="/contact" className="text-xs font-bold tracking-[0.2em] uppercase text-white/70 hover:text-white transition-colors">Contact Us</Link></li>
+                        <li><Link href="/" className="text-sm font-semibold tracking-widest uppercase text-white/90 hover:text-white transition-colors">Home</Link></li>
+                        <li><Link href="/shop" className="text-sm font-semibold tracking-widest uppercase text-white/90 hover:text-white transition-colors">Shop</Link></li>
+                        <li><Link href="/about" className="text-sm font-semibold tracking-widest uppercase text-white/90 hover:text-white transition-colors">About Us</Link></li>
+                        <li><Link href="/contact" className="text-sm font-semibold tracking-widest uppercase text-white/90 hover:text-white transition-colors">Contact Us</Link></li>
                     </ul>
 
                     {/* Desktop Actions */}
                     <div className="hidden md:flex items-center justify-end space-x-8">
-                        <Link href="/login" className="flex items-center space-x-2 text-xs font-bold tracking-[0.2em] uppercase text-white/70 hover:text-white transition-colors">
+                        <Link href="/login" className="flex items-center space-x-2 text-sm font-semibold tracking-widest uppercase text-white/90 hover:text-white transition-colors">
                             <User className="w-4 h-4" />
                             <span>Login</span>
                         </Link>
-                        <Link href="/register" className="px-6 py-2 border border-white/50 text-xs font-bold tracking-[0.2em] uppercase text-white hover:bg-white hover:text-black transition-all">
+                        <Link href="/register" className="px-6 py-2 border border-white/50 text-sm font-semibold tracking-widest uppercase text-white hover:bg-white hover:text-black transition-all">
                             Register
                         </Link>
                         <Link href="/cart" className="relative flex items-center group">
