@@ -4,6 +4,7 @@ import "./globals.css";
 
 import Navbar from "@/components/user/Navbar";
 import Footer from "@/components/Footer";
+import { Toaster } from "sonner";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -38,6 +39,7 @@ export default function RootLayout({
         </main>
 
         <Footer />
+        <Toaster position="top-center" richColors />
       </body>
     </html>
   );
