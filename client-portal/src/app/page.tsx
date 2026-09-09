@@ -1,6 +1,8 @@
 import HeroSection from "@/components/HeroSection";
 import Link from "next/link";
 import { Truck, ShieldCheck, HeadphonesIcon } from "lucide-react";
+import Feature from "@/components/Feature";
+import CategoryTest from "@/components/CategoryTest";
 
 
 export default function HomePage() {
@@ -41,6 +43,9 @@ export default function HomePage() {
         </div>
 
       </section>
+
+      <Feature />
+      <CategoryTest />
 
     </div>
   );
