@@ -32,14 +32,14 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
 
     const emailSubject = 'Verify Your Account - YouShop';
     const emailBody = generateOtpEmailTemplate(firstName, otp);
-    
+
     await sendEmail(user.email, emailSubject, emailBody);
 
     res.status(201).json({
       message: 'Registration successful! Please check your email for the OTP to verify your account.',
       userId: user._id
     });
-    
+
   } catch (error) {
     console.error('Registration Error:', error);
     res.status(500).json({ message: 'Internal server error.' });
@@ -50,47 +50,49 @@ export const verifyOtp = async (req: Request, res: Response): Promise<void> => {
 
   try {
 
-    const {email, otp} = req.body;
+    const { email, otp } = req.body;
 
     const user = await User.findOne({ email });
 
 
     if (!user) {
       res
-      .status(404).
-      json
-      ({
-         message: 'User not found.'
-         }
+        .status(404).
+        json
+        ({
+          message: 'User not found.'
+        }
         );
       return;
     }
 
     if (user.isVerified) {
       res.
-      status(400)
-      .json(
-        {
-         message: 'User is already verified.' 
-        }
-      );
+        status(400)
+        .json(
+          {
+            message: 'User is already verified.'
+          }
+        );
+      return;
     }
 
     if (user.otp !== otp) {
       res.
-      status(400).
-      json(
-        {
-           message: 'Invalid OTP.'
-           }
-          );
+        status(400).
+        json(
+          {
+            message: 'Invalid OTP.'
+          }
+        );
+      return;
     }
-     
+
     if (user.otpExpire && user.otpExpire.getTime() < Date.now()) {
       res.
-      status(400).
-      json({
-         message: 'OTP has expired. Please request a new one.' 
+        status(400).
+        json({
+          message: 'OTP has expired. Please request a new one.'
         });
       return;
     }
@@ -102,124 +104,124 @@ export const verifyOtp = async (req: Request, res: Response): Promise<void> => {
     await user.save();
 
     res.
-    status(200).
-    json({
-       message: 'OTP verified successfully. Your account is now verified.'
-    });
+      status(200).
+      json({
+        message: 'OTP verified successfully. Your account is now verified.'
+      });
 
-  }catch (error) {
+  } catch (error) {
     console.error('OTP Verification Error:', error);
     res.
-    status(500).
-    json(
-      {
-       message: 'Internal server error.'
-       }
+      status(500).
+      json(
+        {
+          message: 'Internal server error.'
+        }
       );
   }
 }
 
 export const loginUser = async (req: Request, res: Response): Promise<void> => {
 
-  try{
+  try {
 
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email})
+    const user = await User.findOne({ email })
 
     if (!user) {
       res.
-      status(404).
-      json(
-        {
-         message: 'invalid email or password.' 
-        }
-      );
+        status(404).
+        json(
+          {
+            message: 'invalid email or password.'
+          }
+        );
       return;
     }
 
     if (!user.isVerified) {
       res.
-      status(403).
-      json(
-        {
-          message: 'User is not verified. Please verify your account first.'
+        status(403).
+        json(
+          {
+            message: 'User is not verified. Please verify your account first.'
+          }
+        );
+      return;
     }
-    );
-    return;
-  }
 
-   const isMatch = await bcrypt.compare(password, user.password as string);
+    const isMatch = await bcrypt.compare(password, user.password as string);
 
-   if (!isMatch) {
-    res.
-    status(401).
-    json(
-      {
-         message: 'invalid email or password.' 
-        }
-      );
-    return;
-   }
+    if (!isMatch) {
+      res.
+        status(401).
+        json(
+          {
+            message: 'invalid email or password.'
+          }
+        );
+      return;
+    }
 
-   const token = jwt.sign(
+    const token = jwt.sign(
       { userId: user._id, role: user.role },
       process.env.JWT_SECRET as string,
       { expiresIn: '30d' }
     );
 
     res.
-    status(200).
-    json(
-      {
-        _id: user._id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      role: user.role,
-      token
-      }
-    );
+      status(200).
+      json(
+        {
+          _id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          role: user.role,
+          token
+        }
+      );
 
-  }catch (error) {
+  } catch (error) {
     console.error('Login Error:', error);
     res.
-    status(500).
-    json(
-      {
-       message: 'Internal server error.'
-       }
+      status(500).
+      json(
+        {
+          message: 'Internal server error.'
+        }
       );
   }
 }
 
 export const resendOtp = async (req: Request, res: Response): Promise<void> => {
 
-  try{
+  try {
 
     const { email } = req.body;
 
-    const user = await User.findOne({ email})
+    const user = await User.findOne({ email })
 
     if (!user) {
       res.
-      status(404).
-      json(
-        {
-         message: 'User not found.' 
-        }
-      );
+        status(404).
+        json(
+          {
+            message: 'User not found.'
+          }
+        );
       return;
     }
 
     if (user.isVerified) {
       res.
-      status(400).
-      json(
-        {
-          message: 'User is already verified.'
-        }
-      );
+        status(400).
+        json(
+          {
+            message: 'User is already verified.'
+          }
+        );
       return;
     }
 
@@ -238,105 +240,105 @@ export const resendOtp = async (req: Request, res: Response): Promise<void> => {
     await sendEmail(user.email, emailSubject, emailBody);
 
     res.
-    status(200).
-    json(
-      {
-        message: 'OTP resent successfully. Please check your email for the new OTP.'
-      }
-    );
+      status(200).
+      json(
+        {
+          message: 'OTP resent successfully. Please check your email for the new OTP.'
+        }
+      );
 
 
-  }catch (error) {
+  } catch (error) {
     console.error('Resend OTP Error:', error);
     res.
-    status(500).
-    json(
-      {
-       message: 'Internal server error.'
-       }
+      status(500).
+      json(
+        {
+          message: 'Internal server error.'
+        }
       );
   }
 }
 
 export const forgotPassword = async (req: Request, res: Response): Promise<void> => {
-    try{
+  try {
 
-      const { email } = req.body;
+    const { email } = req.body;
 
-      const user = await User.findOne({ email})
-
-      if (!user) {
-        res.
-        status(404).
-        json(
-          {
-           message: 'User not found.' 
-          }
-        );
-        return;
-      }
-
-      const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
-
-      const resetPasswordExpire = new Date(Date.now() + 10 * 60 * 1000);
-
-      user.resetPasswordToken = resetToken;
-      user.resetPasswordExpire = resetPasswordExpire;
-
-      await user.save();
-
-      const emailSubject = 'Reset Your Password - teen angle';
-
-      const emailBody = generateResetPasswordEmailTemplate(user.firstName, resetToken);
-
-      await sendEmail(user.email, emailSubject, emailBody);
-
-      res.status(200)
-      .json({ 
-        message: 'Password reset code has been sent to your email.' 
-      });
-
-
-    }catch (error) {
-        console.error('Forgot Password Error:', error);
-        res.
-        status(500).
-        json(
-          {
-           message: 'Internal server error.'
-           }
-          );
-      }
-}
-
-export const resetPassword = async (req: Request, res: Response): Promise<void> => {
-  try{
-
-    const {email,otp, newPassword}= req.body;
-
-    const user = await User.findOne({ email});
+    const user = await User.findOne({ email })
 
     if (!user) {
       res.
-      status(404).
-      json({ message: 'User not found.' });
+        status(404).
+        json(
+          {
+            message: 'User not found.'
+          }
+        );
+      return;
+    }
+
+    const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
+
+    const resetPasswordExpire = new Date(Date.now() + 10 * 60 * 1000);
+
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpire = resetPasswordExpire;
+
+    await user.save();
+
+    const emailSubject = 'Reset Your Password - teen angle';
+
+    const emailBody = generateResetPasswordEmailTemplate(user.firstName, resetToken);
+
+    await sendEmail(user.email, emailSubject, emailBody);
+
+    res.status(200)
+      .json({
+        message: 'Password reset code has been sent to your email.'
+      });
+
+
+  } catch (error) {
+    console.error('Forgot Password Error:', error);
+    res.
+      status(500).
+      json(
+        {
+          message: 'Internal server error.'
+        }
+      );
+  }
+}
+
+export const resetPassword = async (req: Request, res: Response): Promise<void> => {
+  try {
+
+    const { email, otp, newPassword } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      res.
+        status(404).
+        json({ message: 'User not found.' });
       return;
     }
 
     if (user.resetPasswordToken !== otp) {
       res.
-      status(400).
-      json({ message: 'Invalid reset code.' });
+        status(400).
+        json({ message: 'Invalid reset code.' });
       return;
     }
 
     if (user.resetPasswordExpire && user.resetPasswordExpire.getTime() < Date.now()) {
 
       res.
-      status(400).
-      json({ 
-        message: 'Reset code has expired. Please request a new one.' 
-      });
+        status(400).
+        json({
+          message: 'Reset code has expired. Please request a new one.'
+        });
       return;
     }
 
@@ -350,19 +352,19 @@ export const resetPassword = async (req: Request, res: Response): Promise<void> 
     await user.save();
 
     res.
-    status(200).
-    json({ 
-      message: 'Password reset successful. You can now login with your new password.' 
-    });
+      status(200).
+      json({
+        message: 'Password reset successful. You can now login with your new password.'
+      });
 
-  }catch (error) {
+  } catch (error) {
     console.error('Reset Password Error:', error);
     res.
-    status(500).
-    json(
-      {
-        message: 'Internal server error.'
-      }
+      status(500).
+      json(
+        {
+          message: 'Internal server error.'
+        }
       );
   }
 }

@@ -44,8 +44,8 @@ export default function RegisterPage() {
             setSuccessMessage(response.data.message);
             toast.success(response.data.message || "Registration successful!");
             setTimeout(() => {
-                router.push('/verify-otp')
-            })
+                router.push(`/verify-otp?email=${encodeURIComponent(email)}`)
+            }, 1500)
         }
         catch (err: unknown) {
 
@@ -72,7 +72,7 @@ export default function RegisterPage() {
     return (
         <div className="flex flex-col md:flex-row min-h-screen w-full bg-white text-black">
             {/* Left Image Section */}
-            <div 
+            <div
                 className="w-full md:w-1/2 h-64 md:h-auto bg-cover bg-center"
                 style={{ backgroundImage: `url('https://res.cloudinary.com/doujmzgn3/image/upload/v1788941160/lucid-origin_A_sleek_and_luxurious_modern_minimalist_login_page_background_featuring_a_high-e-0_xtaa6m.jpg')` }}
             >
@@ -89,7 +89,7 @@ export default function RegisterPage() {
                             <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-2" htmlFor="firstName">firstname</label>
                             <div className="relative">
                                 <User className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                                <input 
+                                <input
                                     id="firstName"
                                     type="text"
                                     className="w-full bg-gray-50 border border-gray-200 text-black pl-12 pr-4 py-3 focus:outline-none focus:border-black transition-colors"
@@ -102,12 +102,12 @@ export default function RegisterPage() {
                             <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-2" htmlFor="lastName">lastname</label>
                             <div className="relative">
                                 <User className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                                <input 
+                                <input
                                     id="lastName"
                                     type="text"
                                     className="w-full bg-gray-50 border border-gray-200 text-black pl-12 pr-4 py-3 focus:outline-none focus:border-black transition-colors"
                                     value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)} 
+                                    onChange={(e) => setLastName(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -116,12 +116,12 @@ export default function RegisterPage() {
                             <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-2" htmlFor="email">email</label>
                             <div className="relative">
                                 <Mail className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                                <input 
+                                <input
                                     id="email"
                                     type="email"
                                     className="w-full bg-gray-50 border border-gray-200 text-black pl-12 pr-4 py-3 focus:outline-none focus:border-black transition-colors"
                                     value={email}
-                                    onChange={(e) => setEmail(e.target.value)} 
+                                    onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -130,12 +130,12 @@ export default function RegisterPage() {
                             <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-2" htmlFor="password">password</label>
                             <div className="relative">
                                 <Lock className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" />
-                                <input 
+                                <input
                                     id="password"
                                     type={showPassword ? "text" : "password"}
                                     className="w-full bg-gray-50 border border-gray-200 text-black pl-12 pr-12 py-3 focus:outline-none focus:border-black transition-colors"
                                     value={password}
-                                    onChange={(e) => setPassword(e.target.value)} 
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <button
                                     type="button"
@@ -146,7 +146,7 @@ export default function RegisterPage() {
                                 </button>
                             </div>
                         </div>
-                        <button 
+                        <button
                             type="submit"
                             disabled={loading}
                             className="w-full bg-black text-white font-bold uppercase tracking-widest py-4 hover:bg-gray-800 transition-colors disabled:opacity-50 mt-4"

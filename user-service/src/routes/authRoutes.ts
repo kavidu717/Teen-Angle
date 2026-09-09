@@ -1,11 +1,13 @@
 import express from "express";
 
-import { registerUser,
-forgotPassword,
- resetPassword,
-  verifyOtp ,
-   loginUser,
-    resendOtp} from "../controllers/authController";
+import {
+    registerUser,
+    forgotPassword,
+    resetPassword,
+    verifyOtp,
+    loginUser,
+    resendOtp
+} from "../controllers/authController";
 
 
 
