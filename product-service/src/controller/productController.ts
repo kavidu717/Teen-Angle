@@ -2,6 +2,7 @@ import { Response, Request } from 'express';
 import Product from '../models/Product';
 import { AuthRequest } from '../middleware/authMiddleware';
 import mongoose from 'mongoose';
+import Category from '../models/Category';
 
 export const createProduct = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
@@ -10,9 +11,9 @@ export const createProduct = async (req: AuthRequest, res: Response): Promise<vo
     const files = req.files as any[];
     if (!files || files.length === 0) {
       res.
-      status(400).
-      json({
-         message: 'At least one image is required' 
+        status(400).
+        json({
+          message: 'At least one image is required'
         });
       return;
     }
@@ -31,10 +32,10 @@ export const createProduct = async (req: AuthRequest, res: Response): Promise<vo
 
     if (parsedVariants.length === 0) {
       res.
-      status(400).
-      json({ 
-        message: 'At least one product variant is required' 
-    });
+        status(400).
+        json({
+          message: 'At least one product variant is required'
+        });
       return;
     }
 
@@ -53,103 +54,186 @@ export const createProduct = async (req: AuthRequest, res: Response): Promise<vo
   } catch (error) {
     console.error('Error creating product:', error);
     res.
-    status(500).
-    json({ 
-        message: 'Internal server error' 
-    });
+      status(500).
+      json({
+        message: 'Internal server error'
+      });
   }
 };
 
-export const getAllProducts = async (req: Request, res: Response): Promise<void> => {
+export const getAllProducts = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
-    const { 
-      page = 1, 
-      limit = 12, 
-      keyword, 
-      category, 
-      priceRange, 
-      brand, 
-      sex, 
-      ...dynamicFilters 
+    const {
+      page = 1,
+      limit = 12,
+      keyword,
+      category,
+      priceRange,
+      ...filters
     } = req.query;
 
     const query: any = {};
 
-    if (keyword) {
+    // Keyword search
+    if (keyword && typeof keyword === "string") {
       query.$or = [
-        { name: { $regex: keyword as string, $options: 'i' } },
-        { description: { $regex: keyword as string, $options: 'i' } }
+        {
+          name: {
+            $regex: keyword,
+            $options: "i",
+          },
+        },
+        {
+          description: {
+            $regex: keyword,
+            $options: "i",
+          },
+        },
       ];
     }
 
-    if (category) {
+    // Category filter
+    if (category && typeof category === "string") {
       query.category = category;
     }
 
-    if (priceRange) {
-      const [min, max] = (priceRange as string).split('-');
+    // Price filter
+    if (priceRange && typeof priceRange === "string") {
+      const [min, max] = priceRange.split("-");
+
       query.basePrice = {};
-      
+
       if (min && !isNaN(Number(min))) {
         query.basePrice.$gte = Number(min);
       }
+
       if (max && !isNaN(Number(max))) {
         query.basePrice.$lte = Number(max);
       }
     }
 
-    if (brand) query['generalAttributes.Brand'] = brand;
-    if (sex) query['generalAttributes.Sex'] = sex;
+    // Get dynamic attributes from category
+    let dynamicAttributes: string[] = [];
 
-    const variantConditions: any = { stock: { $gt: 0 } };
-    let hasVariantFilter = false;
+    if (category && typeof category === "string") {
+      const selectedCategory = await Category.findById(category).select(
+        "dynamicAttributes"
+      );
 
-    Object.keys(dynamicFilters).forEach((key) => {
-      if (typeof dynamicFilters[key] === 'string') {
-        variantConditions[`attributes.${key}`] = dynamicFilters[key];
-        hasVariantFilter = true;
+      console.log("CATEGORY:", category);
+      console.log(
+        "DYNAMIC ATTRIBUTES:",
+        selectedCategory?.dynamicAttributes
+      );
+
+      if (selectedCategory) {
+        dynamicAttributes = selectedCategory.dynamicAttributes.map(
+          (attribute) => attribute.name
+        );
       }
-    });
-
-    if (hasVariantFilter) {
-      query.variants = { $elemMatch: variantConditions };
     }
 
-    const skip = (Number(page) - 1) * Number(limit);
+    console.log("DYNAMIC ATTRIBUTE NAMES:", dynamicAttributes);
+    console.log("FILTERS:", filters);
 
+    // Variant conditions
+    const variantConditions: any = {
+      stock: {
+        $gt: 0,
+      },
+    };
+
+    let hasVariantFilter = false;
+
+    // Dynamic filters
+    Object.entries(filters).forEach(([key, value]) => {
+      console.log("FILTER KEY:", key);
+      console.log("FILTER VALUE:", value);
+
+      if (typeof value !== "string") {
+        return;
+      }
+
+      // Dynamic category attribute
+      if (dynamicAttributes.includes(key)) {
+        console.log("VARIANT FILTER:", key, value);
+
+        variantConditions[`attributes.${key}`] = value;
+
+        hasVariantFilter = true;
+
+        return;
+      }
+
+      // General product attribute
+      console.log("GENERAL FILTER:", key, value);
+
+      query[`generalAttributes.${key}`] = value;
+    });
+
+    // Apply variant filters
+    if (hasVariantFilter) {
+      query.variants = {
+        $elemMatch: variantConditions,
+      };
+    }
+
+    console.log(
+      "FINAL QUERY:",
+      JSON.stringify(query, null, 2)
+    );
+
+    // Pagination
+    const currentPage = Math.max(Number(page), 1);
+    const currentLimit = Math.max(Number(limit), 1);
+
+    const skip = (currentPage - 1) * currentLimit;
+
+    // Count
     const total = await Product.countDocuments(query);
-    
+
+    // Get products
     const products = await Product.find(query)
-      .populate('category', 'name image')
+      .populate(
+        "category",
+        "name image dynamicAttributes"
+      )
       .skip(skip)
-      .limit(Number(limit))
-      .sort({ createdAt: -1 });
+      .limit(currentLimit)
+      .sort({
+        createdAt: -1,
+      });
 
     res.status(200).json({
       products,
-      page: Number(page),
-      pages: Math.ceil(total / Number(limit)),
-      total
+      page: currentPage,
+      pages: Math.ceil(total / currentLimit),
+      total,
     });
   } catch (error) {
-    res.status(500).json({ message: 'Internal server error' });
+    console.error("Get products error:", error);
+
+    res.status(500).json({
+      message: "Internal server error",
+    });
   }
 };
-
-
 
 export const getProductById = async (req: Request, res: Response): Promise<void> => {
   try {
 
-     const id=req.params.id;
+    const id = req.params.id;
 
-    if (!id || typeof id !== 'string' ||!mongoose.Types.ObjectId.isValid(id)) {
+    if (!id || typeof id !== 'string' || !mongoose.Types.ObjectId.isValid(id)) {
 
       res.
-      status(400).
-      json(
-        {
-           message: 'Invalid Product ID' 
+        status(400).
+        json(
+          {
+            message: 'Invalid Product ID'
           }
         );
       return;
@@ -159,37 +243,37 @@ export const getProductById = async (req: Request, res: Response): Promise<void>
 
     if (!product) {
       res.
-      status(404).
-      json(
-        {
-           message: 'Product not found'
-           }
-          );
-      return; 
+        status(404).
+        json(
+          {
+            message: 'Product not found'
+          }
+        );
+      return;
     }
 
     const relatedProducts = await Product.find({
       category: product.category,
       _id: { $ne: product._id }
     })
-    .populate('category', 'name')
-    .limit(8);
+      .populate('category', 'name')
+      .limit(8);
 
     res.
-    status(200).
-    json(
-      {
-      product,
-      relatedProducts
-    }
-  );
+      status(200).
+      json(
+        {
+          product,
+          relatedProducts
+        }
+      );
 
   } catch (error) {
     res
-    .status(500).
-    json(
-      {
-         message: 'Internal server error' 
+      .status(500).
+      json(
+        {
+          message: 'Internal server error'
         }
       );
   }
